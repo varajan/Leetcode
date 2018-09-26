@@ -1,4 +1,3 @@
-using LeetCode.Easy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LeetCodeTests.Easy
@@ -6,24 +5,18 @@ namespace LeetCodeTests.Easy
     [TestClass]
     public class ImplementStr
     {
-        private LeetCode.Easy.ImplementStr Str => new LeetCode.Easy.ImplementStr();
+        private static LeetCode.Easy.ImplementStr Str => new LeetCode.Easy.ImplementStr();
 
         [TestMethod]
-        public void EmptyNeedle()
-        {
-            Assert.AreEqual(Str.StrStr(string.Empty, string.Empty), 0);
-        }
+        public void Test01_Empty_haystack() => Assert.AreEqual(-1, Str.StrStr(string.Empty, "a"));
 
         [TestMethod]
-        public void ExistedNeedle()
-        {
-            Assert.AreEqual(Str.StrStr("hello", "ll"), 2);
-        }
+        public void Test02_Empty_needle() => Assert.AreEqual(0, Str.StrStr(string.Empty, string.Empty));
 
         [TestMethod]
-        public void NonExistedNeedle()
-        {
-            Assert.AreEqual(Str.StrStr("aaaaa", "ba"), -1);
-        }
+        public void Test3_Needle_is_found() => Assert.AreEqual(2, Str.StrStr("hello", "ll"));
+
+        [TestMethod]
+        public void Test4_Needle_is_not_found() => Assert.AreEqual(-1, Str.StrStr("aaaaa", "ba"));
     }
 }
