@@ -1,12 +1,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Str = LeetCode.Easy.ImplementStr;
 
 namespace LeetCodeTests.Easy
 {
     [TestClass]
     public class ImplementStr
     {
-        private static LeetCode.Easy.ImplementStr Str => new LeetCode.Easy.ImplementStr();
-
         [TestMethod]
         public void Test01_Empty_haystack() => Assert.AreEqual(-1, Str.StrStr(string.Empty, "a"));
 

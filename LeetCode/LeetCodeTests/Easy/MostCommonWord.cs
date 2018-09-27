@@ -1,12 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Words = LeetCode.Easy.MostCommonWord;
 
 namespace LeetCodeTests.Easy
 {
     [TestClass]
     public class MostCommonWord
     {
-        private static LeetCode.Easy.MostCommonWord Words => new LeetCode.Easy.MostCommonWord();
-
         [TestMethod]
         public void Test1_Most_common_word_is_banned() => Assert.AreEqual(
             "ball",

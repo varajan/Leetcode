@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace LeetCode.Easy
 {
-    public class MostCommonWord
+    public static class MostCommonWord
     {
-        public string GetMostCommonWord(string paragraph, string[] banned)
+        public static string GetMostCommonWord(string paragraph, string[] banned)
         {
             var words = new Dictionary<string, int>();
             var max = 0;

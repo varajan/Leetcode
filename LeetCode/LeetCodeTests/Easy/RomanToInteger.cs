@@ -1,13 +1,11 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Roman = LeetCode.Easy.RomanToInteger;
 
 namespace LeetCodeTests.Easy
 {
     [TestClass]
     public class RomanToInteger
     {
-        private static LeetCode.Easy.RomanToInteger Roman => new LeetCode.Easy.RomanToInteger();
-
         [TestMethod]
         public void Test1_Empty_is_0() => Assert.AreEqual(0, Roman.RomanToInt(string.Empty));
 

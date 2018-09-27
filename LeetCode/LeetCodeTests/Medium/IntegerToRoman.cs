@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Roman = LeetCode.Medium.IntegerToRoman;
+
 
 namespace LeetCodeTests.Medium
 {
     [TestClass]
     public class IntegerToRoman
     {
-        private static LeetCode.Medium.IntegerToRoman Roman => new LeetCode.Medium.IntegerToRoman();
-
         [TestMethod]
         public void Test1_Empty_is_0() => Assert.AreEqual(string.Empty, Roman.IntToRoman(0));
 

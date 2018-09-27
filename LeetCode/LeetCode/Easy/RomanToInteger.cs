@@ -2,14 +2,14 @@
 
 namespace LeetCode.Easy
 {
-    public class RomanToInteger
+    public static class RomanToInteger
     {
-        public int RomanToInt(string s)
+        public static int RomanToInt(string s)
         {
-            return s.Select((t, i) => (i + 1 < s.Length && GetInt(t) < GetInt(s[i + 1]) ? -GetInt(t) : GetInt(t))).Sum();
+            return s.Select((t, i) => i + 1 < s.Length && t.GetInt() < s[i + 1].GetInt() ? -t.GetInt() : t.GetInt()).Sum();
         }
 
-        private static int GetInt(char roman)
+        private static int GetInt(this char roman)
         {
             var result = 0;
 

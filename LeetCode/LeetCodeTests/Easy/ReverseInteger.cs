@@ -1,13 +1,11 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Reverse = LeetCode.Easy.ReverseInteger;
 
 namespace LeetCodeTests.Easy
 {
     [TestClass]
     public class ReverseInteger
     {
-        private static LeetCode.Easy.ReverseInteger Reverse => new LeetCode.Easy.ReverseInteger();
-
         [TestMethod]
         public void Test1_Positive_number() => Assert.AreEqual(321, Reverse.Reverse(123));
 

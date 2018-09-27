@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace LeetCode.Easy
 {
-    public class ReverseInteger
+    public static class ReverseInteger
     {
-        public int Reverse(int x)
+        public static int Reverse(int x)
         {
             if (x == int.MinValue) return 0;
             var positive = x > 0;

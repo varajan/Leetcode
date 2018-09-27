@@ -1,8 +1,8 @@
 ﻿namespace LeetCode.Easy
 {
-    public class ImplementStr
+    public static class ImplementStr
     {
-        public int StrStr(string haystack, string needle)
+        public static int StrStr(string haystack, string needle)
         {
             if (haystack == needle || needle.Length == 0) return 0;
 

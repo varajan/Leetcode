@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace LeetCode.Medium
 {
-    public class IntegerToRoman
+    public static class IntegerToRoman
     {
-        public string IntToRoman(int num)
+        public static string IntToRoman(int num)
         {
             var replaces = new List<List<string>>
             {
@@ -21,10 +21,10 @@ namespace LeetCode.Medium
 
             foreach (var x in new [] {'M', 'D', 'C', 'L', 'X', 'V', 'I'})
             {
-                while (num >= GetInt(x))
+                while (num >= x.GetInt())
                 {
                     result += x;
-                    num -= GetInt(x);
+                    num -= x.GetInt();
                 }
             }
 
@@ -36,7 +36,7 @@ namespace LeetCode.Medium
             return result;
         }
 
-        private static int GetInt(char roman)
+        private static int GetInt(this char roman)
         {
             var result = 0;
 
