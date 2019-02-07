@@ -7,15 +7,15 @@ namespace LeetCodeTests.Easy
     public class ImplementStr
     {
         [TestMethod]
-        public void Test01_Empty_haystack() => Assert.AreEqual(-1, Str.StrStr(string.Empty, "a"));
+        public void ImplementStr_01_Empty_haystack() => Assert.AreEqual(-1, Str.StrStr(string.Empty, "a"));
 
         [TestMethod]
-        public void Test02_Empty_needle() => Assert.AreEqual(0, Str.StrStr(string.Empty, string.Empty));
+        public void ImplementStr_02_Empty_needle() => Assert.AreEqual(0, Str.StrStr(string.Empty, string.Empty));
 
         [TestMethod]
-        public void Test3_Needle_is_found() => Assert.AreEqual(2, Str.StrStr("hello", "ll"));
+        public void ImplementStr_03_Needle_is_found() => Assert.AreEqual(2, Str.StrStr("hello", "ll"));
 
         [TestMethod]
-        public void Test4_Needle_is_not_found() => Assert.AreEqual(-1, Str.StrStr("aaaaa", "ba"));
+        public void ImplementStr_04_Needle_is_not_found() => Assert.AreEqual(-1, Str.StrStr("aaaaa", "ba"));
     }
 }
