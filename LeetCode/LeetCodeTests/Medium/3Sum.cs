@@ -8336,7 +8336,7 @@ namespace LeetCodeTests.Medium
             #endregion
 
             Assert.IsTrue(duration < 10, $"Test passed in {duration} seconds with limit of 10.");
-            //Extensions<int>.ShouldContainAll(result, output);
+            Extensions<int>.ShouldContainAll(result, output);
         }
 
         [TestMethod]

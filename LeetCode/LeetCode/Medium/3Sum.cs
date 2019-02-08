@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LeetCode.Medium
@@ -9,28 +10,22 @@ namespace LeetCode.Medium
         {
             var result = new List<List<int>>();
             var set = new HashSet<string>();
-            var jj = false;
 
-            if (nums.Length < 3)
-            {
-                return result;
-            }
+            Array.Sort(nums);
 
-            nums = nums.OrderBy(x => x).ToArray();
-
-            for (var i = 0; i < nums.Length; i++)
+            for (var i = 0; i < nums.Length-2; i++)
             {
                 if (i > 0 && nums[i] == nums[i - 1]) continue;
 
-                jj = false;
                 for (var j = nums.Length - 1; j > i; j--)
                 {
-                    if (jj && nums[j] == nums[j + 1]) continue;
-                    jj = true;
+                    if (j < nums.Length - 1 && nums[j] == nums[j + 1]) continue;
+
+                    var sum2 = nums[i] + nums[j];
 
                     for (var k = i + 1; k < j; k++)
                     {
-                        if (nums[i] + nums[j] + nums[k] == 0)
+                        if (sum2 == -nums[k])
                         {
                             var line = $"{nums[i]},{nums[j]},{nums[k]}";
 
@@ -38,6 +33,7 @@ namespace LeetCode.Medium
                             {
                                 result.Add(new List<int> { nums[i], nums[j], nums[k] });
                                 set.Add(line);
+                                break;
                             }
                         }
                     }
