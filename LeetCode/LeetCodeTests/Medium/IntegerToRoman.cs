@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Roman = LeetCode.Medium.IntegerToRoman;
 
-
 namespace LeetCodeTests.Medium
 {
     [TestClass]
