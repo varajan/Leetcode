@@ -8,8 +8,7 @@ namespace LeetCode.Medium
     {
         public static List<List<int>> ThreeSum(int[] nums)
         {
-            var result = new List<List<int>>();
-            var set = new HashSet<string>();
+            var result = new HashSet<List<int>>();
 
             Array.Sort(nums);
 
@@ -27,20 +26,14 @@ namespace LeetCode.Medium
                     {
                         if (sum2 == -nums[k])
                         {
-                            var line = $"{nums[i]},{nums[j]},{nums[k]}";
-
-                            if (!set.Contains(line))
-                            {
-                                result.Add(new List<int> { nums[i], nums[j], nums[k] });
-                                set.Add(line);
-                                break;
-                            }
+                            result.Add(new List<int> { nums[i], nums[j], nums[k] });
+                            break;
                         }
                     }
                 }
             }
 
-            return result;
+            return result.ToList();
         }
     }
 }

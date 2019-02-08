@@ -45,7 +45,7 @@ namespace LeetCodeTests
 
                 if (i < 0)
                 {
-                    message += $"Line was not found: {AsString(line)}";
+                    message += $"Line was not found: {AsString(line)}\n";
                 }
                 else
                 {
