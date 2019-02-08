@@ -4,8 +4,8 @@
     {
         public static int MyAtoi(string str)
         {
-            str = str.Trim() + ".";
-            bool negative = (str[0] == '-');
+            str = str.Trim() + "+";
+            bool negative = false;
 
             var number = "0";
 
@@ -13,6 +13,7 @@
             {
                 if (i == 0 && (str[0] == '-' || str[0] == '+'))
                 {
+                    negative = (str[0] == '-');
                     continue;
                 }
 
