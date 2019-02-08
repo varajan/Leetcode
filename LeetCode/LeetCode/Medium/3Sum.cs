@@ -16,7 +16,7 @@ namespace LeetCode.Medium
             {
                 if (i > 0 && nums[i] == nums[i - 1]) continue;
 
-                for (var j = nums.Length - 1; j > i; j--)
+                for (var j = nums.Length - 1; j > i+1; j--)
                 {
                     if (j < nums.Length - 1 && nums[j] == nums[j + 1]) continue;
 
@@ -29,6 +29,8 @@ namespace LeetCode.Medium
                             result.Add(new List<int> { nums[i], nums[j], nums[k] });
                             break;
                         }
+
+                        if (sum2 > -nums[k]) break;
                     }
                 }
             }
