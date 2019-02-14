@@ -15,7 +15,7 @@ namespace LeetCodeTests.Medium
             var input = new int[] {};
             var output = new List<List<int>>();
 
-            Extensions<int>.ShouldEqual(ThreeSum.ThreeSum(input), output);
+            ListExtensions<int>.ShouldEqual(ThreeSum.ThreeSum(input), output);
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace LeetCodeTests.Medium
             var input = new int[] {-1, 1};
             var output = new List<List<int>>();
 
-            Extensions<int>.ShouldEqual(ThreeSum.ThreeSum(input), output);
+            ListExtensions<int>.ShouldEqual(ThreeSum.ThreeSum(input), output);
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace LeetCodeTests.Medium
                 new List<int> {-1, 0, 1}
             };
 
-            Extensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
+            ListExtensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace LeetCodeTests.Medium
                 new List<int> {-2, 0, 2}
             };
 
-            Extensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
+            ListExtensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace LeetCodeTests.Medium
                 new List<int> {-2, 0, 2}
             };
 
-            Extensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
+            ListExtensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
         }
 
         [TestMethod]
@@ -194,7 +194,7 @@ namespace LeetCodeTests.Medium
             };
             #endregion
 
-            Extensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
+            ListExtensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
         }
 
         [TestMethod]
@@ -208,7 +208,7 @@ namespace LeetCodeTests.Medium
                 new List<int> { -1, -1, 2 }
             };
 
-            Extensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
+            ListExtensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
         }
 
         [TestMethod]
@@ -258,7 +258,7 @@ namespace LeetCodeTests.Medium
                 new List<int> {0, 0, 0}
             };
 
-            Extensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
+            ListExtensions<int>.ShouldContainAll(ThreeSum.ThreeSum(input), output);
         }
 
         [TestMethod]
@@ -271,7 +271,7 @@ namespace LeetCodeTests.Medium
             var duration = (DateTime.Now - start).TotalMilliseconds;
 
             Assert.IsTrue(duration < 0.5, $"Test passed in {duration} ms with limit of 0.5 ms.");
-            Extensions<int>.ShouldEqual(result, output);
+            ListExtensions<int>.ShouldEqual(result, output);
         }
 
         [TestMethod]
@@ -8414,7 +8414,7 @@ namespace LeetCodeTests.Medium
             #endregion
 
             Assert.IsTrue(duration < 10, $"Test passed in {duration} seconds with limit of 10.");
-            Extensions<int>.ShouldContainAll(result, output);
+            ListExtensions<int>.ShouldContainAll(result, output);
         }
     }
 }

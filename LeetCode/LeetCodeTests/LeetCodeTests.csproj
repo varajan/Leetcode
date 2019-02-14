@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LeetCode\LeetCode.csproj" />
+    <ProjectReference Include="..\Library\Library.csproj" />
   </ItemGroup>
 
 </Project>

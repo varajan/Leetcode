@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Library
 {
-    public static class Extensions<T>
+    public static class ListExtensions<T>
     {
         public static void ShouldEqual(List<List<T>> actual, List<List<T>> expected)
         {

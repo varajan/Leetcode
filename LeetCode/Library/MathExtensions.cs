@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace LeetCode
+namespace Library
 {
-    public static class Extensions
+    public static class MathExtensions
     {
         public static int Factorial(this int n)
         {
@@ -42,7 +42,7 @@ namespace LeetCode
 
             for (var column = 0; column < length; column++)
             {
-                var numberCount = n.Power(length-column-1);
+                var numberCount = n.Power(length - column - 1);
                 var numbers = new Dictionary<int, int>();
                 for (var number = 0; number < n; number++)
                 {
