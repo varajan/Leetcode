@@ -18,9 +18,9 @@ namespace Library
         }
 
 
-        public static int Power(this int n, int power)
+        public static double Power(this int n, int power)
         {
-            var result = 1;
+            double result = 1;
 
             for (var i = 0; i < power; i++)
             {

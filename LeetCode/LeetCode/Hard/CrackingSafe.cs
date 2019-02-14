@@ -11,6 +11,69 @@ namespace LeetCode.Hard
         {
             var length = k.Power(n) + (n - 1);
             var codes = k.GenerateAllCombinations(n);
+
+            //var combinations = new List<string>();
+
+            //foreach (var key in Keys(length, k))
+            //{
+            //    var combination = "";
+            //    foreach (var i in key)
+            //    {
+            //        combination += i;
+            //    }
+
+            //    combinations.Add(combination);
+            //}
+
+            foreach (var key in Keys(length, k))
+            {
+                var combination = "";
+                foreach (var i in key)
+                {
+                    combination += i;
+                }
+
+                if (codes.All(code => combination.Contains(code))) return combination;
+            }
+
+            return string.Empty;
+        }
+
+        private static IEnumerable<List<int>> Keys(double length, int max)
+        {
+            var result = new List<int>();
+
+            for (var i = 0; i < length; i++)
+            {
+                result.Add(Math.Min(i, max-1));
+            }
+
+            yield return result;
+
+            for (var i = 1; i < max.Power((int)length); i++)
+            {
+                yield return result.Next(max);
+            }
+        }
+
+        private static List<int> Next(this List<int> row, int max)
+        {
+            var overflow = 1;
+
+            for (int i = row.Count - 1; i >= 0; i--)
+            {
+                var next = row[i] + overflow;
+                overflow = next >= max ? 1 : 0;
+                row[i] = next >= max ? 0 : next;
+            }
+
+            return row;
+        }
+
+        public static string CrackSafe3(int n, int k)
+        {
+            var length = k.Power(n) + (n - 1);
+            var codes = k.GenerateAllCombinations(n);
             var result = CrackSafe2(n, k, codes.ToList());
 
             foreach (var combination in MathExtensions.GenerateCombinations(codes.Count))

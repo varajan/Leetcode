@@ -25,6 +25,12 @@ namespace LeetCodeTests.Hard
         [TestMethod]
         public void CrackingSafe_06_n_is_2_and_k_is_4() => VerifyCrack(2, 4, 17);
 
+        [TestMethod]
+        public void CrackingSafe_07_n_is_2_and_k_is_1() => VerifyCrack(2, 1, 2);
+
+        [TestMethod]
+        public void CrackingSafe_08_n_is_2_and_k_is_1() => Assert.AreEqual("00", Crack.CrackSafe(2, 1));
+
 
         private static void VerifyCrack(int n, int k, int expectedLength)
         {
