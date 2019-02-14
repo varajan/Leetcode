@@ -17,7 +17,64 @@ namespace LeetCode
             return result;
         }
 
-        public static List<string> GenerateCombinations(this int n, int length)
+
+        public static int Power(this int n, int power)
+        {
+            var result = 1;
+
+            for (var i = 0; i < power; i++)
+            {
+                result *= n;
+            }
+
+            return result;
+        }
+
+        public static List<string> GenerateAllCombinations(this int n, int length)
+        {
+            var result = new List<string>();
+            var combinations = n.Power(length);
+
+            for (var row = 0; row < combinations; row++)
+            {
+                result.Add(string.Empty);
+            }
+
+            for (var column = 0; column < length; column++)
+            {
+                var numberCount = n.Power(length-column-1);
+                var numbers = new Dictionary<int, int>();
+                for (var number = 0; number < n; number++)
+                {
+                    numbers.Add(number, 0);
+                }
+
+                for (var row = 0; row < combinations; row++)
+                {
+                    for (var number = 0; number < n; number++)
+                    {
+                        if (numbers[number] < numberCount)
+                        {
+                            result[row] += $"{number}";
+                            numbers[number] = numbers[number] + 1;
+                            break;
+                        }
+                    }
+
+                    if (numbers.All(record => record.Value >= numberCount))
+                    {
+                        for (var x = 0; x < n; x++)
+                        {
+                            numbers[x] = 0;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static List<string> GenerateUniqueCombinations(this int n, int length)
         {
             var result = new List<string>();
             var combinations = GetCombinationCount(n, length);
@@ -62,11 +119,6 @@ namespace LeetCode
                             numbers[x] = 0;
                         }
                     }
-                }
-
-                for (var x = 0; x < n; x++)
-                {
-                    numbers[x] = 0;
                 }
             }
 
