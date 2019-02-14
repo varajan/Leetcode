@@ -14,5 +14,11 @@ namespace LeetCodeTests.Hard
 
         [TestMethod]
         public void CrackingSafe_03() => Assert.AreEqual("0011101000", Crack.CrackSafe(3, 2));
+
+
+        private void VerifyCrack(string code, string expectedLength, string n, string k)
+        {
+//var codes = 
+        }
     }
 }

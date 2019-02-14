@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace LeetCodeTests
+namespace Library
 {
-    internal static class Extensions<T>
+    public static class Extensions<T>
     {
         public static void ShouldEqual(List<List<T>> actual, List<List<T>> expected)
         {

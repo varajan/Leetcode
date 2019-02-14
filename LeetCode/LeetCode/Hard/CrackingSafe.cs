@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Linq;
 
 namespace LeetCode.Hard
 {
@@ -11,6 +8,8 @@ namespace LeetCode.Hard
         {
             // n - length
             var codes = k.GenerateAllCombinations(n);
+
+            codes.Reverse();
 
             var result = string.Empty;
 
@@ -41,9 +40,9 @@ namespace LeetCode.Hard
 
                     for (var length = n-1; length > 0; length--)
                     {
-                        if (result.StartsWith(code.Substring(length)))
+                        if (result.StartsWith(code.Substring(length-1)))
                         {
-                            result = code.Substring(0, length) + result;
+                            result = code.Substring(0, length-1) + result;
                             codes.Remove(code);
                             found = true;
                             break;
