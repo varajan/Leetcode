@@ -9,9 +9,46 @@ namespace LeetCode.Hard
     {
         public static string CrackSafe(int n, int k)
         {
+            var length = k.Power(n) + (n - 1);
             var codes = k.GenerateAllCombinations(n);
-            var result = string.Empty;
+            var result = CrackSafe2(n, k, codes.ToList());
 
+            foreach (var combination in MathExtensions.GenerateCombinations(codes.Count))
+            {
+                if (result.Length == length)
+                {
+                    break;
+                }
+
+                result = string.Empty;
+                foreach (var i in combination)
+                {
+                    result = result.Combine(codes[i]);
+
+                    if (result.Length > length) break;
+                }
+            }
+
+            return result;
+        }
+
+        private static string Combine(this string code, string combination)
+        {
+            var length = Math.Min(code.Length, combination.Length);
+            for (; length > 0; length--)
+            {
+                if (code.Substring(code.Length - length) == combination.Substring(0, length)) break;
+            }
+
+            return code + combination.Substring(length);
+        }
+
+        public static string CrackSafe2(int n, int k, List<string> codes)
+        {
+            //var codes = k.GenerateAllCombinations(n);
+            codes.Reverse();
+            var result = string.Empty;
+ 
             while (codes.Count > 0)
             {
                 foreach (var code in codes)

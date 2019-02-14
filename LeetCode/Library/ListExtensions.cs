@@ -7,6 +7,21 @@ namespace Library
 {
     public static class ListExtensions<T>
     {
+        public static IEnumerable<string> GetCombination(List<T> list)
+        {
+            var result = string.Empty;
+
+            foreach (var combination in MathExtensions.GenerateCombinations(list.Count))
+            {
+                for (var i = 0; i < combination.Count; i++)
+                {
+                    result += list[i];
+                }
+            }
+
+            yield return result;
+        }
+
         public static void ShouldEqual(List<List<T>> actual, List<List<T>> expected)
         {
             var message = string.Empty;

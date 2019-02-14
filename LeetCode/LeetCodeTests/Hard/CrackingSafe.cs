@@ -11,10 +11,19 @@ namespace LeetCodeTests.Hard
         public void CrackingSafe_01_n_is_1_and_k_is_2() => VerifyCrack(1, 2, 2);
 
         [TestMethod]
-        public void CrackingSafe_02_n_is_2_and_k_is_2() => VerifyCrack(2, 2, 6);
+        public void CrackingSafe_02_n_is_2_and_k_is_2() => VerifyCrack(2, 2, 5);
 
         [TestMethod]
-        public void CrackingSafe_03_n_is_3_and_k_is_2() => VerifyCrack(3, 2, 9);
+        public void CrackingSafe_03_n_is_3_and_k_is_2() => VerifyCrack(3, 2, 10);
+
+        [TestMethod]
+        public void CrackingSafe_04_n_is_1_and_k_is_9() => VerifyCrack(1, 9, 9);
+
+        [TestMethod]
+        public void CrackingSafe_05_n_is_2_and_k_is_3() => VerifyCrack(2, 3, 10);
+
+        [TestMethod]
+        public void CrackingSafe_06_n_is_2_and_k_is_4() => VerifyCrack(2, 4, 17);
 
 
         private static void VerifyCrack(int n, int k, int expectedLength)

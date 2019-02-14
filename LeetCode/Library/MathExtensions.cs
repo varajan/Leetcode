@@ -74,6 +74,44 @@ namespace Library
             return result;
         }
 
+        public static IEnumerable<List<int>> GenerateCombinations(int length)
+        {
+            var result = new List<int>();
+
+            for (var i = 0; i < length; i++)
+            {
+                result.Add(i);
+            }
+
+            yield return result;
+
+            for (var i = 1; i < length.Factorial(); i++)
+            {
+                List<int> next;
+                do
+                {
+                    next = result.Next();
+                } while (next.Distinct().Count() != next.Count);
+
+                yield return next;
+            }
+        }
+
+        private static List<int> Next(this List<int> row)
+        {
+            var max = row.Count;
+            var overflow = 1;
+
+            for (int i = max-1; i >= 0; i--)
+            {
+                var next = row[i] + overflow;
+                overflow = next >= max ? 1 : 0;
+                row[i] = next >= max ? 0 : next;
+            }
+
+            return row;
+        }
+
         public static List<string> GenerateUniqueCombinations(this int n, int length)
         {
             var result = new List<string>();
