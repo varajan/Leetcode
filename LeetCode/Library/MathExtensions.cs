@@ -42,32 +42,22 @@ namespace Library
 
             for (var column = 0; column < length; column++)
             {
-                var numberCount = n.Power(length - column - 1);
-                var numbers = new Dictionary<int, int>();
-                for (var number = 0; number < n; number++)
-                {
-                    numbers.Add(number, 0);
-                }
+                var numberCount = (int)n.Power(length - column - 1);
+                var number = 0;
+                var count = 0;
 
                 for (var row = 0; row < combinations; row++)
                 {
-                    for (var number = 0; number < n; number++)
+                    if (count == numberCount)
                     {
-                        if (numbers[number] < numberCount)
-                        {
-                            result[row] += $"{number}";
-                            numbers[number] = numbers[number] + 1;
-                            break;
-                        }
+                        number++;
+                        count = 0;
                     }
 
-                    if (numbers.All(record => record.Value >= numberCount))
-                    {
-                        for (var x = 0; x < n; x++)
-                        {
-                            numbers[x] = 0;
-                        }
-                    }
+                    if (number == n) number = 0;
+
+                    result[row] += (char)(number + 48);
+                    count++;
                 }
             }
 
