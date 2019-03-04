@@ -43,9 +43,9 @@ namespace LeetCodeTests.Hard
         [TestMethod]
         public void CrackingSafe_09_n_is_2_and_k_is_2() => VerifyCrack(2, 2, 5);
 
-        [Timeout(10000)]
+        [Timeout(30000)]
         [TestMethod]
-        public void CrackingSafe_10_n_is_2_and_k_is_9() => VerifyCrack(2, 9, 5);
+        public void CrackingSafe_10_n_is_2_and_k_is_9() => VerifyCrack(2, 9, 82);
 
 
         private static void VerifyCrack(int n, int k, int expectedLength)
