@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace LeetCode.Medium
 {
@@ -17,7 +16,7 @@ namespace LeetCode.Medium
                 {
                     if (grid[j, i] == 1)
                     {
-                        result = Math.Max(result, CalculateArea(ref grid, 1, i, j));
+                        result = Math.Max(result, CalculateArea(ref grid, 1, i, j, height, width));
                     }
                 }
             }
@@ -25,39 +24,28 @@ namespace LeetCode.Medium
             return result;
         }
 
-        private static int CalculateArea(ref int[,] map, int area, int x, int y)
+        private static int CalculateArea(ref int[,] map, int area, int x, int y, int height, int width)
         {
-            var roots = new List<Tuple<int, int>>
-            {
-                new Tuple<int, int>(-1, 0),
-                new Tuple<int, int>(0, -1),
-                new Tuple<int, int>(1, 0),
-                new Tuple<int, int>(0, 1)
-            };
-
             map[y, x] = 0;
 
-            foreach (var root in roots)
+            for (int dx = -1; dx <= 1; dx++)
             {
-                var has = HasSomething(ref map, x, y, root.Item1, root.Item2);
-
-                if (HasSomething(ref map, x, y, root.Item1, root.Item2))
+                for (int dy = -1; dy <= 1; dy++)
                 {
-                    area = CalculateArea(ref map, ++area, x + root.Item1, y + root.Item2);
+                    //                    if (dx!=dy && dx*dy==0)
+                    if (Math.Abs(dx) != Math.Abs(dy))
+                    {
+                        var xx = x + dx;
+                        var yy = y + dy;
+                        if (0 <= xx && xx <= width && 0 <= yy && yy <= height && map[yy, xx] == 1)
+                        {
+                            area = CalculateArea(ref map, ++area, xx, yy, height, width);
+                        }
+                    }
                 }
             }
 
             return area;
         }
-
-        private static bool HasSomething(ref int[,] map, int x, int y, int dx, int dy)
-        {
-            var height = map.GetUpperBound(0);
-            var width = map.GetUpperBound(1);
-            var xx = x + dx;
-            var yy = y + dy;
-
-            return 0 <= xx && xx <= width && 0 <= yy && yy <= height && map[yy, xx] == 1;
-        }
-    }
+   }
 }
