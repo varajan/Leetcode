@@ -32,7 +32,6 @@ namespace LeetCode.Medium
             {
                 for (int dy = -1; dy <= 1; dy++)
                 {
-                    //                    if (dx!=dy && dx*dy==0)
                     if (Math.Abs(dx) != Math.Abs(dy))
                     {
                         var xx = x + dx;
