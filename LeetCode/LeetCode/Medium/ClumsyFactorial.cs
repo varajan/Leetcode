@@ -12,7 +12,7 @@
             {
                 j++;
 
-                if (j % 4 == 1) { multipl *= i; added = false; }
+                if (j % 4 == 1) { multipl *= i; }
                 if (j % 4 == 2) { multipl /= i; }
                 if (j % 4 == 3) { result += multipl + i; added = true; }
                 if (j % 4 == 0) { multipl = -i; added = false; }
