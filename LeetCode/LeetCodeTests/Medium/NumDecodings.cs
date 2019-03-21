@@ -24,10 +24,16 @@ namespace LeetCodeTests.Medium
         [TestMethod]
         public void NumDecodings_10_code_has_1_way() => Assert.AreEqual(1, Decoder.NumDecodings("10"));
 
-        //[Timeout(4000)]
+        [Timeout(500)]
         [TestMethod]
-        public void NumDecodings_long_long_code_has_589824_ways() => Assert.AreEqual(
+        public void NumDecodings_long1_code_has_589824_ways() => Assert.AreEqual(
             589824,
             Decoder.NumDecodings("4757562545844617494555774581341211511296816786586787755257741178599337186486723247528324612117156948"));
+
+        //[Timeout(5500)]
+        [TestMethod]
+        public void NumDecodings_long2_code_has_3981312_ways() => Assert.AreEqual(
+            3981312,
+            Decoder.NumDecodings("9371597631128776948387197132267188677349946742344217846154932859125134924241649584251978418763151253"));
     }
 }
