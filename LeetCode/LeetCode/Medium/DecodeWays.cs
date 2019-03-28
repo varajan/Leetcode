@@ -4,10 +4,10 @@
     {
         public static int NumDecodings(string s)
         {
-            return GetRoots(s);
+            return GetRoots(s.ToCharArray());
         }
 
-        private static int GetRoots(string code, int i = 0, int roots = 0)
+        public static int GetRoots(char[] code, int i = 0, int roots = 0)
         {
             if (code.Length == i)
             {
