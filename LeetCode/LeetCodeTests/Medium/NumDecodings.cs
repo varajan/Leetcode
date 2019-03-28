@@ -30,7 +30,7 @@ namespace LeetCodeTests.Medium
             589824,
             Decoder.NumDecodings("4757562545844617494555774581341211511296816786586787755257741178599337186486723247528324612117156948"));
 
-        //[Timeout(5500)]
+        [Timeout(500)]
         [TestMethod]
         public void NumDecodings_long2_code_has_3981312_ways() => Assert.AreEqual(
             3981312,
