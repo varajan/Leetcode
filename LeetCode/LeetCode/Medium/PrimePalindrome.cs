@@ -87,11 +87,10 @@ namespace LeetCode.Medium
             return result;
         }
 
-        static bool IsPrime(int n)
+        private static bool IsPrime(int n)
         {
             if (n <= 3) return n > 1;
-            else if (n % 2 == 0 || n % 3 == 0)
-            return false;
+            if (n % 2 == 0 || n % 3 == 0) return false;
 
             var i = 5;
             while (i * i <= n)
