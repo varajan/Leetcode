@@ -22,6 +22,9 @@ namespace Library
             yield return result;
         }
 
+        public static void ShouldEqual(IEnumerable<IEnumerable<T>> actual, List<List<T>> expected) =>
+            ShouldEqual(actual.ToList(), expected);
+
         public static void ShouldEqual(List<List<T>> actual, List<List<T>> expected)
         {
             var message = string.Empty;
