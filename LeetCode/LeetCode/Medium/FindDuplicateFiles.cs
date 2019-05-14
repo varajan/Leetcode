@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace LeetCode.Medium
 {
@@ -8,57 +7,40 @@ namespace LeetCode.Medium
     {
         public List<List<string>> FindDuplicate(string[] paths)
         {
-            var contents = Content(paths);
-            var result = new List<string>[contents.Count];
-            for (int i = 0; i < contents.Count; i++)
-            {
-                result[i] = new List<string>();
-            }
+            var result = new Dictionary<string, List<string>>();
 
             foreach (var path in paths)
             {
-                var files = GetPaths(path);
-                foreach (var file in files)
+                foreach (var file in GetPaths(path))
                 {
-                    var index = contents.IndexOf(Content(file));
-                    result[index].Add(GetPath(file));
+                    var parts = file.Split('(');
+                    var filePath = parts[0];
+                    var content = parts[1];
+
+                    if (result.ContainsKey(content))
+                    {
+                        result[content].Add(filePath);
+                    }
+                    else
+                    {
+                        result[content] = new List<string> { filePath };
+                    }
                 }
             }
 
-            return result.ToList();
+            return result.Select(x => x.Value).Where(x => x.Count > 1).ToList();
         }
 
-        private string GetPath(string file) => file.Split('(').First();
-
-        private List<string> GetPaths(string path)
+        private IEnumerable<string> GetPaths(string path)
         {
             var parts = path.Split(' ');
-            var root = parts.First();
+            var root = parts[0];
             var result = new List<string>();
             
             for (int i = 1; i < parts.Length; i++)
             {
-                result.Add($"{root}/{parts[i]}");
+                yield return root + "/" + parts[i];
             }
-
-            return result;
-        }
-
-        private string Content(string file) => Regex.Matches(file, @"\(\w*\)").First().Value;
-
-        private List<string> Content(string[] paths)
-        {
-            var result = new List<string>();
-
-            foreach (var path in paths)
-            {
-                foreach (var match in Regex.Matches(path, @"\(\w*\)"))
-                {
-                    result.Add(match.ToString());
-                }
-            }
-
-            return result.Distinct().ToList();
         }
     }
 }

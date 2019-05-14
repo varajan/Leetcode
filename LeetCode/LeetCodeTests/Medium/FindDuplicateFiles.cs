@@ -21,5 +21,16 @@ namespace LeetCodeTests.Medium
 
             ListExtensions<string>.ShouldContainAll(Find.FindDuplicate(input), output);
         }
+
+        [TestMethod]
+        public void FindDuplicateFiles_02()
+        {
+            var input = new[] { "root/a 1.txt(abcd) 2.txt(efsfgh)", "root/c 3.txt(abdfcd)", "root/c/d 4.txt(efggdfh)" };
+            var output = new List<List<string>>{};
+
+            ListExtensions<string>.ShouldContainAll(Find.FindDuplicate(input), output);
+        }
+
+        //["root/a 1.txt(abcd) 2.txt(efsfgh)","root/c 3.txt(abdfcd)","root/c/d 4.txt(efggdfh)"]
     }
 }
