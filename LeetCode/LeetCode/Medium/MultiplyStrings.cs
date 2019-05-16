@@ -5,11 +5,11 @@ namespace LeetCode.Medium
 {
     public class MultiplyStrings
     {
-        private Dictionary<char, string> Memory = new Dictionary<char, string>();
+        private readonly Dictionary<char, string> _memory = new Dictionary<char, string>();
 
         public string Multiply(string num1, string num2)
         {
-            string result = "";
+            var result = "";
             var i = "";
 
             if (num1.Length < num2.Length)
@@ -19,60 +19,60 @@ namespace LeetCode.Medium
                 num2 = t;
             }
 
-            for (int j = num1.Length-1; j >= 0; j--)
+            for (var j = num1.Length-1; j >= 0; j--)
             {
-                string multipy;
+                string multiply;
                 var key = num1[j];
-                if (Memory.ContainsKey(key))
+                if (_memory.ContainsKey(key))
                 {
-                    multipy = Memory[key];
+                    multiply = _memory[key];
                 }
                 else
                 {
-                    multipy = Myltiply(num2, num1[j]);
-                    Memory.Add(key, multipy);
+                    multiply = Multiply(num2, num1[j]);
+                    _memory.Add(key, multiply);
                 }
 
-                result = Add(result, multipy + i);
+                result = Add(result, multiply + i);
                 i += "0";
             }
 
             return Trim(result);
         }
 
-        private string Trim(string number)
+        private static string Trim(string number)
         {
             var result = "";
             var begin = true;
 
-            for (int i = 0; i < number.Length; i++)
+            foreach (var x in number)
             {
-                if (begin && number[i] == '0') continue;
+                if (begin && x == '0') continue;
 
                 begin = false;
-                result += number[i];
+                result += x;
             }
 
             return result.Length > 0 ? result : "0";
         }
 
-        private string Myltiply(string number, char x)
+        private string Multiply(string number, char x)
         {
             if (x == '0') return "0";
 
-            string result = "";
+            var result = "";
             var i ="";
 
             for (int j = number.Length-1; j >= 0; j--)
             {
-                result = Add(result, Multipy(x, number[j]) + i);
+                result = Add(result, Multiply(x, number[j]) + i);
                 i += "0";
             }
 
             return result;
         }
 
-        private string Add(string x, string y)
+        private static string Add(string x, string y)
         {
             var result = "";
             var offset = 0;
@@ -96,6 +96,6 @@ namespace LeetCode.Medium
             return result;
         }
 
-        private int Multipy(char x, char y) => (x - 48) * (y - 48);
+        private static int Multiply(char x, char y) => (x - 48) * (y - 48);
     }
 }
