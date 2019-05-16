@@ -47,13 +47,7 @@
         private string Hundreds(int number)
         {
             var hundreds = number / 100;
-
-            switch (hundreds)
-            {
-                case 0: return string.Empty;
-                case 1: return "One Hundred";
-                default: return $"{OneDigit(hundreds)} Hundred";
-            }
+            return hundreds == 0 ? string.Empty : $"{OneDigit(hundreds)} Hundred";
         }
 
         private string TwoDigits(int number)
