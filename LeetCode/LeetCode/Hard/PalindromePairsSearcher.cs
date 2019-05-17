@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace LeetCode.Hard
 {
@@ -14,26 +13,27 @@ namespace LeetCode.Hard
             {
                 if (i == j) continue;
 
-//                if (IsPalindrome($"{words[i]}{words[j]}"))
-                if (IsPalindrome(words[i] + words[j]))
+                if (IsPalindrome(ref words[i], ref words[j]))
                     result.Add(new List<int> { i, j });
-//                if (IsPalindrome($"{words[j]}{words[i]}"))
-                if (IsPalindrome(words[j] + words[i]))
+
+                if (IsPalindrome(ref words[j], ref words[i]))
                     result.Add(new List<int> { j, i });
             }
 
             return result;
         }
 
-        bool IsPalindrome(string s)
+        bool IsPalindrome(ref string s1, ref string s2)
         {
-            if (string.IsNullOrEmpty(s)) return false;
-
-            var length = s.Length;
+            var length1 = s1.Length;
+            var length2 = s2.Length;
+            var length = length1 + length2;
 
             for (var i = 0; i < length / 2; i++)
             {
-                if (s[i] != s[length - i - 1]) return false;
+                var ch1 = i < length1 ? s1[i] : s2[i - length1];
+                var ch2 = i < length2 ? s2[length2 - 1 - i] : s1[length1 - 1 + length2 - i];
+                if (ch1 != ch2) return false;
             }
 
             return true;
