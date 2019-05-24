@@ -4,16 +4,16 @@ namespace LeetCode.Medium
 {
     public static class PrimePalindrome
     {
-        public static int GetPrimePalindrome(int N)
+        public static int GetPrimePalindrome(int n)
         {
-            if (!IsPalindrome(N)) N = Next(N);
+            if (!IsPalindrome(n)) n = Next(n);
 
-            while (!IsPrime(N))
+            while (!IsPrime(n))
             {
-                N = Next(N);
+                n = Next(n);
             }
 
-            return N;
+            return n;
         }
 
         private static int Next(int n)
@@ -118,7 +118,7 @@ namespace LeetCode.Medium
         {
             var nn = n.ToString();
             var len = nn.Length;
-            for (int i = 0; i < len / 2; i++)
+            for (var i = 0; i < len / 2; i++)
                 if (nn[i] != nn[len - i - 1]) return false;
 
             return true;
