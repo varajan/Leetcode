@@ -4,24 +4,22 @@
     {
         public string LongestPalindrome(string s)
         {
-            int resultStart = 0;
-            int resultLength = 0;
-
-            for (int start = 0; start < s.Length; start++)
+            int sLength = s.Length;
+            for (int length = sLength; length > 0; length--)
             {
-                for (int length = (s.Length - start); resultLength < length; length--)
+                for (int i = 0; i <= sLength - length; i++)
                 {
-                    if (!IsPalindrome(ref s, ref start, ref length)) continue;
-
-                    resultStart = start;
-                    resultLength = length;
+                    if (IsPalindrome(s, i, length))
+                    {
+                        return s.Substring(i, length);
+                    }
                 }
             }
 
-            return s.Substring(resultStart, resultLength);
+            return s;
         }
 
-        private static bool IsPalindrome(ref string s, ref int start, ref int length)
+        private static bool IsPalindrome(string s, int start, int length)
         {
             int offset = (length - 1 + start);
             for (var i = 0; i < length / 2; i++)
