@@ -19,7 +19,7 @@
             return s;
         }
 
-        private static bool IsPalindrome(string s, int start, int length)
+        private bool IsPalindrome(string s, int start, int length)
         {
             int offset = (length - 1 + start);
             for (var i = 0; i < length / 2; i++)
