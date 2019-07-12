@@ -1,1 +1,1 @@
-Task from https://leetcode.com
+Tasks from https://leetcode.com
