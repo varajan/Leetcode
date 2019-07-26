@@ -22,6 +22,27 @@ namespace Library
             yield return result;
         }
 
+        public static void ShouldEqual(IEnumerable<T> actualList, IEnumerable<T> expectedList)
+        {
+            var message = string.Empty;
+            var actual = actualList.ToList();
+            var expected = expectedList.ToList();
+
+            if (actual.Count != expected.Count)
+                message += $"Different count of rows. Expected: '{expected.Count}', actual: '{actual.Count}'.\n";
+
+            for (var i = 0; i < Math.Min(actual.Count, expected.Count); i++)
+            {
+                if (!expected[i].Equals("?") && actual[i].ToString() != expected[i].ToString())
+                    message += $"Different values at row '{i}'. Expected: '{expected[i]}', actual: '{actual[i]}'.\n";
+            }
+
+            if (!message.Equals(string.Empty))
+            {
+                Assert.Fail($"Rows are different:\n{message}");
+            }
+        }
+
         public static void ShouldEqual(List<List<T>> actual, List<List<T>> expected)
         {
             var message = string.Empty;
@@ -47,7 +68,7 @@ namespace Library
             }
         }
 
- public static void ShouldContainAll(List<List<T>> actual, List<List<T>> expected)
+        public static void ShouldContainAll(List<List<T>> actual, List<List<T>> expected)
         {
             var message = string.Empty;
 

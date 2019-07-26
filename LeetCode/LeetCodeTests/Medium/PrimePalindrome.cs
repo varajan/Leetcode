@@ -39,22 +39,22 @@ namespace LeetCodeTests.Medium
         public void PrimePalindrome_of_9965700_is_9978799() =>
             Assert.AreEqual(9978799, Palindrome.GetPrimePalindrome(9965700));
 
-        [Timeout(200)]
+        [Timeout(1000)]
         [TestMethod]
         public void PrimePalindrome_of_9989900_is_100030001() =>
             Assert.AreEqual(100030001, Palindrome.GetPrimePalindrome(9989900));
 
-        [Timeout(200)]
+        [Timeout(1000)]
         [TestMethod]
         public void PrimePalindrome_of_45887963_is_100030001() =>
             Assert.AreEqual(100030001, Palindrome.GetPrimePalindrome(45887963));
 
-        [Timeout(200)]
+        [Timeout(1000)]
         [TestMethod]
         public void PrimePalindrome_of_100000000_is_100030001() =>
             Assert.AreEqual(100030001, Palindrome.GetPrimePalindrome(100000000));
 
-        [Timeout(200)]
+        [Timeout(1000)]
         [TestMethod]
         public void PrimePalindrome_of_31880255_is_100030001() =>
             Assert.AreEqual(100030001, Palindrome.GetPrimePalindrome(31880255));

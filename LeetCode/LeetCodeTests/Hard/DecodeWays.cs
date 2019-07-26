@@ -22,7 +22,7 @@ namespace LeetCodeTests.Hard
         [TestMethod]
         public void DecodeWays_xxxxxxx_is_11859129() => Assert.AreEqual(11859129, Decoder.NumDecodings("*******"));
 
-        [Timeout(2000)]
+        [Timeout(5000)]
         [TestMethod]
         public void DecodeWays_1xxxxxxx0_is_4232034() => Assert.AreEqual(4232034, Decoder.NumDecodings("1*******0"));
 
