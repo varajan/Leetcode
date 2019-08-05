@@ -43,6 +43,10 @@ namespace Library
             }
         }
 
+        public static void ShouldEqual(T[][] actual, T[][] expected) => ShouldEqual(
+            actual.Select(row => row.ToList()).ToList(),
+            expected.Select(row => row.ToList()).ToList());
+
         public static void ShouldEqual(List<List<T>> actual, List<List<T>> expected)
         {
             var message = string.Empty;
