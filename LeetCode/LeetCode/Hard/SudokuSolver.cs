@@ -6,12 +6,16 @@ namespace LeetCode.Hard
 {
     public class SudokuSolver
     {
-        public char[][] SolveSudoku(char[][] board) => Solve(board);
+        public void SolveSudoku(in char[][] board)
+        {
+            Solve(board);
+        }
 
-        char[][] Solve(char[][] test)
+        public char[][] Solve(in char[][] board)
         {
             Dictionary<Point, List<char>> options;
             List<KeyValuePair<Point, List<char>>> singleOptions;
+            var test = board.Select(x => x.ToArray()).ToArray();
 
             do
             {
@@ -48,7 +52,7 @@ namespace LeetCode.Hard
             return null;
         }
 
-        Dictionary<Point, List<char>> GetOptions(char[][] test)
+        private Dictionary<Point, List<char>> GetOptions(in char[][] test)
         {
             var options = new Dictionary<Point, List<char>>();
 
@@ -81,7 +85,7 @@ namespace LeetCode.Hard
             return options;
         }
 
-        Dictionary<Point, List<char>> OptimizedOptions(Dictionary<Point, List<char>> options)
+        private Dictionary<Point, List<char>> OptimizedOptions(Dictionary<Point, List<char>> options)
         {
             bool optimized;
 
@@ -147,9 +151,9 @@ namespace LeetCode.Hard
             return options;
         }
 
-        bool IsSudokuSolved(char[][] test) => !test.Any(row => row.Any(x => x == '.'));
+        private bool IsSudokuSolved(in char[][] test) => !test.Any(row => row.Any(x => x == '.'));
 
-        bool IsValidNumber(char[][] test, Point point, char x)
+        private bool IsValidNumber(in char[][] test, Point point, char x)
         {
             var matrix = test.Select(a => a.ToArray()).ToArray();
             matrix[point.X][point.Y] = x;
@@ -157,48 +161,48 @@ namespace LeetCode.Hard
             return IsValidSudoku(matrix);
         }
 
-        bool IsValidSudoku(char[][] test)
+        private bool IsValidSudoku(in char[][] test)
         {
             for (int i = 0; i < 9; i++)
             {
-                if (!IsRowValid(i)) return false;
-                if (!IsColumnValid(i)) return false;
-                if (!IsBlockValid(i)) return false;
+                if (!IsRowValid(test, i)) return false;
+                if (!IsColumnValid(test, i)) return false;
+                if (!IsBlockValid(test, i)) return false;
             }
 
             return true;
 
-            bool IsRowValid(int row)
+            bool IsRowValid(in char[][] matrix, int row)
             {
                 var chars = new HashSet<int>();
 
                 for (int i = 0; i < 9; i++)
                 {
-                    if (test[row][i] == '.') continue;
-                    if (chars.Contains(test[row][i])) return false;
+                    if (matrix[row][i] == '.') continue;
+                    if (chars.Contains(matrix[row][i])) return false;
 
-                    chars.Add(test[row][i]);
+                    chars.Add(matrix[row][i]);
                 }
 
                 return true;
             }
 
-            bool IsColumnValid(int column)
+            bool IsColumnValid(in char[][] matrix, int column)
             {
                 var chars = new HashSet<int>();
 
                 for (int i = 0; i < 9; i++)
                 {
-                    if (test[i][column] == '.') continue;
-                    if (chars.Contains(test[i][column])) return false;
+                    if (matrix[i][column] == '.') continue;
+                    if (chars.Contains(matrix[i][column])) return false;
 
-                    chars.Add(test[i][column]);
+                    chars.Add(matrix[i][column]);
                 }
 
                 return true;
             }
 
-            bool IsBlockValid(int block)
+            bool IsBlockValid(in char[][] matrix, int block)
             {
                 var chars = new HashSet<int>();
 
@@ -207,10 +211,10 @@ namespace LeetCode.Hard
                     int x = GetBlockX(block, i);
                     int y = GetBlockY(block, i);
 
-                    if (test[x][y] == '.') continue;
-                    if (chars.Contains(test[x][y])) return false;
+                    if (matrix[x][y] == '.') continue;
+                    if (chars.Contains(matrix[x][y])) return false;
 
-                    chars.Add(test[x][y]);
+                    chars.Add(matrix[x][y]);
                 }
 
                 return true;
@@ -218,8 +222,8 @@ namespace LeetCode.Hard
             }
         }
 
-        int GetBlockX(int block, int i) => (block / 3) * 3 + i / 3;
+        private int GetBlockX(int block, int i) => (block / 3) * 3 + i / 3;
 
-        int GetBlockY(int block, int i) => (block % 3) * 3 + i % 3;
+        private int GetBlockY(int block, int i) => (block % 3) * 3 + i % 3;
     }
 }
