@@ -6,24 +6,7 @@ namespace LeetCode.Hard
 {
     public class SudokuSolver
     {
-        public char[][] SolveSudoku(char[][] board)
-        {
-            var matrix = new List<List<char>>();
-
-            for (int i = 0; i < 9; i++)
-            {
-                var row = new List<char>();
-
-                for (int j = 0; j < 9; j++)
-                {
-                    row.Add(board[i][j]);
-                }
-
-                matrix.Add(row);
-            }
-
-            return Solve(matrix.Select(x => x.ToArray()).ToArray());
-        }
+        public char[][] SolveSudoku(char[][] board) => Solve(board);
 
         char[][] Solve(char[][] test)
         {
@@ -37,7 +20,7 @@ namespace LeetCode.Hard
 
                 if (!singleOptions.Any())
                 {
-                    options = OptimizedOptions(test, options);
+                    options = OptimizedOptions(options);
                     singleOptions = options.Where(x => x.Value.Count == 1).ToList();
                 }
 
@@ -98,7 +81,7 @@ namespace LeetCode.Hard
             return options;
         }
 
-        Dictionary<Point, List<char>> OptimizedOptions(char[][] test, Dictionary<Point, List<char>> options)
+        Dictionary<Point, List<char>> OptimizedOptions(Dictionary<Point, List<char>> options)
         {
             bool optimized;
 
@@ -108,8 +91,6 @@ namespace LeetCode.Hard
 
                 for (int block = 0; block < 9; block++)
                 {
-                    var blockNumbers = GetBlockNumbers(test, block);
-
                     var blockX0 = (block / 3) * 3 + 0;
                     var blockX2 = (block / 3) * 3 + 2;
                     var blockY0 = (block % 3) * 3 + 0;
@@ -117,8 +98,6 @@ namespace LeetCode.Hard
 
                     for (char i = '1'; i <= '9'; i++)
                     {
-                        if (blockNumbers.Contains(i)) continue;
-
                         var iOptions = options
                             .Where(x => x.Value.Contains(i))
                             .Where(x => blockX0 <= x.Key.X && x.Key.X <= blockX2)
@@ -168,32 +147,7 @@ namespace LeetCode.Hard
             return options;
         }
 
-        List<char> GetBlockNumbers(char[][] test, int block)
-        {
-            var result = new List<char>();
-            for (int i = 0; i < 9; i++)
-            {
-                int x = GetBlockX(block, i);
-                int y = GetBlockY(block, i);
-
-                if (test[x][y] != '.') result.Add(test[x][y]);
-            }
-
-            return result;
-        }
-
-        bool IsSudokuSolved(char[][] test)
-        {
-            foreach (var row in test)
-            {
-                foreach (var cell in row)
-                {
-                    if (cell == '.') return false;
-                }
-            }
-
-            return true;
-        }
+        bool IsSudokuSolved(char[][] test) => !test.Any(row => row.Any(x => x == '.'));
 
         bool IsValidNumber(char[][] test, Point point, char x)
         {
@@ -254,10 +208,7 @@ namespace LeetCode.Hard
                     int y = GetBlockY(block, i);
 
                     if (test[x][y] == '.') continue;
-                    if (chars.Contains(test[x][y]))
-                    {
-                        return false;
-                    }
+                    if (chars.Contains(test[x][y])) return false;
 
                     chars.Add(test[x][y]);
                 }
