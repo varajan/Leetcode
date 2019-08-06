@@ -6,78 +6,67 @@ namespace LeetCode.Hard
 {
     public class SudokuSolver
     {
-        public void SolveSudoku(in char[][] board)
-        {
-            Solve(board);
-        }
+        public char[][] SolveSudoku(char[][] board) => Solve(board);
 
-        public char[][] Solve(in char[][] board)
-        {
-            Dictionary<Point, List<char>> options;
-            List<KeyValuePair<Point, List<char>>> singleOptions;
-            var test = board.Select(x => x.ToArray()).ToArray();
-
-            do
+        private char[][] Solve(char[][] test)
             {
-                options = GetOptions(test);
-                singleOptions = options.Where(x => x.Value.Count == 1).ToList();
+                Dictionary<Point, List<char>> options;
+                List<KeyValuePair<Point, List<char>>> singleOptions;
 
-                if (!singleOptions.Any())
+                do
                 {
-                    options = OptimizedOptions(options);
+                    options = GetOptions(test);
                     singleOptions = options.Where(x => x.Value.Count == 1).ToList();
-                }
 
-                if (singleOptions.Any())
+                    if (!singleOptions.Any())
+                    {
+                        options = OptimizedOptions(options);
+                        singleOptions = options.Where(x => x.Value.Count == 1).ToList();
+                    }
+
+                    if (singleOptions.Any())
+                    {
+                        singleOptions.ForEach(option => test[option.Key.X][option.Key.Y] = option.Value.First());
+
+                    if (!test.Any(row => row.Any(x => x == '.'))) return test;
+                    }
+                } while (singleOptions.Any());
+
+                var sortedOption = options.OrderBy(x => x.Value.Count).FirstOrDefault();
+                if (sortedOption.Value != null)
                 {
-                    singleOptions.ForEach(option => test[option.Key.X][option.Key.Y] = option.Value.First());
+                    foreach (var x in sortedOption.Value)
+                    {
+                        if (test == null) return null;
 
-                    if (IsSudokuSolved(test)) return test;
+                        var matrix = test.Select(row => row.ToArray()).ToArray();
+                        matrix[sortedOption.Key.X][sortedOption.Key.Y] = x;
+
+                        if (!IsValidSudoku(matrix)) continue;
+
+                        var solution = Solve(matrix);
+                        if (solution != null) return solution;
+                    }
                 }
-            } while (singleOptions.Any());
-
-            var sortedOption = options.OrderBy(x => x.Value.Count).FirstOrDefault();
-
-            foreach (var x in sortedOption.Value ?? new List<char>())
-            {
-                var matrix = test.Select(row => row.ToArray()).ToArray();
-                matrix[sortedOption.Key.X][sortedOption.Key.Y] = x;
-
-                if (!IsValidSudoku(matrix)) continue;
-
-                var solution = Solve(matrix);
-                if (solution != null) return solution;
-            }
 
             return null;
-        }
+            }
 
-        private Dictionary<Point, List<char>> GetOptions(in char[][] test)
+        private Dictionary<Point, List<char>> GetOptions(char[][] test)
         {
-            var options = new Dictionary<Point, List<char>>();
-
+        var options = new Dictionary<Point, List<char>>();
             for (int row = 0; row < 9; row++)
             {
                 for (int column = 0; column < 9; column++)
                 {
-                    if (test[row][column] == '.')
-                    {
-                        var point = new Point { X = row, Y = column };
+                    if (test[row][column] != '.') continue;
 
-                        for (char x = '1'; x <= '9'; x++)
-                        {
-                            if (IsValidNumber(test, point, x))
-                            {
-                                if (options.ContainsKey(point))
-                                {
-                                    options[point].Add(x);
-                                }
-                                else
-                                {
-                                    options.Add(point, new List<char> { x });
-                                }
-                            }
-                        }
+                    var point = new Point {X = row, Y = column};
+                    options.Add(point, new List<char>());
+
+                    for (char i = '1'; i <= '9'; i++)
+                    {
+                        if (IsValidNumber(test, point, i)) options[point].Add(i);
                     }
                 }
             }
@@ -102,10 +91,10 @@ namespace LeetCode.Hard
 
                     for (char i = '1'; i <= '9'; i++)
                     {
-                        var iOptions = options
-                            .Where(x => x.Value.Contains(i))
-                            .Where(x => blockX0 <= x.Key.X && x.Key.X <= blockX2)
-                            .Where(x => blockY0 <= x.Key.Y && x.Key.Y <= blockY2)
+                        var iOptions = options.Where(x =>
+                                x.Value.Contains(i) &&
+                                blockX0 <= x.Key.X && x.Key.X <= blockX2 &&
+                                blockY0 <= x.Key.Y && x.Key.Y <= blockY2)
                             .ToList();
 
                         var rows = iOptions.Select(x => x.Key.X).Distinct().ToList();
@@ -113,64 +102,79 @@ namespace LeetCode.Hard
 
                         if (rows.Count == 1)
                         {
-                            for (int column = 0; column < 9; column++)
-                            {
-                                if (blockY0 <= column && column <= blockY2) continue;
-
-                                for (int row = blockX0; row <= blockX2; row++)
-                                {
-                                    var point = new Point { X = row, Y = column };
-                                    if (!options.ContainsKey(point)) continue;
-
-                                    optimized = optimized || options[point].Contains(i);
-                                    options[point].Remove(i);
-                                }
-                            }
+                            optimized = optimized || OptimizeHorizontal(blockX0, blockX2, blockY0, blockY2, i);
                         }
-
                         if (cols.Count == 1)
                         {
-                            for (int row = 0; row < 9; row++)
-                            {
-                                if (blockX0 <= row && row <= blockX2) continue;
-
-                                for (int column = blockY0; column <= blockY2; column++)
-                                {
-                                    var point = new Point { X = row, Y = column };
-                                    if (!options.ContainsKey(point)) continue;
-
-                                    optimized = optimized || options[point].Contains(i);
-                                    options[point].Remove(i);
-                                }
-                            }
+                            optimized = optimized || OptimizeVertical(blockX0, blockX2, blockY0, blockY2, i);
                         }
                     }
                 }
             } while (optimized);
 
             return options;
-        }
 
-        private bool IsSudokuSolved(in char[][] test) => !test.Any(row => row.Any(x => x == '.'));
+            bool OptimizeHorizontal(int xMin, int xMax, int yMin, int yMax, char x)
+            {
+                bool result = false;
+
+                for (int column = 0; column < 9; column++)
+                {
+                    if (yMin <= column && column <= yMax) continue;
+
+                    for (int row = xMin; row <= xMax; row++)
+                    {
+                        var point = new Point { X = row, Y = column };
+                        if (!options.ContainsKey(point)) continue;
+
+                        result = result || options[point].Contains(x);
+                        options[point].Remove(x);
+                    }
+                }
+
+                return result;
+            }
+
+            bool OptimizeVertical(int xMin, int xMax, int yMin, int yMax, char x)
+            {
+                bool result = false;
+
+                for (int row = 0; row < 9; row++)
+                {
+                    if (xMin <= row && row <= xMax) continue;
+
+                    for (int column = yMin; column <= yMax; column++)
+                    {
+                        var point = new Point { X = row, Y = column };
+                        if (!options.ContainsKey(point)) continue;
+
+                        result = result || options[point].Contains(x);
+                        options[point].Remove(x);
+                    }
+                }
+
+                return result;
+            }
+        }
 
         private bool IsValidNumber(in char[][] test, Point point, char x)
         {
-            var matrix = test.Select(a => a.ToArray()).ToArray();
-            matrix[point.X][point.Y] = x;
+        var matrix = test.Select(a => a.ToArray()).ToArray();
+        matrix[point.X][point.Y] = x;
 
-            return IsValidSudoku(matrix);
+        return IsValidSudoku(matrix);
         }
 
         private bool IsValidSudoku(in char[][] test)
         {
-            for (int i = 0; i < 9; i++)
-            {
-                if (!IsRowValid(test, i)) return false;
-                if (!IsColumnValid(test, i)) return false;
-                if (!IsBlockValid(test, i)) return false;
-            }
+        for (int i = 0; i < 9; i++)
+        {
+            if (!IsRowValid(test, i)) return false;
+            if (!IsColumnValid(test, i)) return false;
+            if (!IsBlockValid(test, i)) return false;
+        }
 
-            return true;
+        return true;
 
             bool IsRowValid(in char[][] matrix, int row)
             {
@@ -208,8 +212,8 @@ namespace LeetCode.Hard
 
                 for (int i = 0; i < 9; i++)
                 {
-                    int x = GetBlockX(block, i);
-                    int y = GetBlockY(block, i);
+                    int x = (block / 3) * 3 + i / 3;
+                    int y = (block % 3) * 3 + i % 3;
 
                     if (matrix[x][y] == '.') continue;
                     if (chars.Contains(matrix[x][y])) return false;
@@ -218,12 +222,7 @@ namespace LeetCode.Hard
                 }
 
                 return true;
-
             }
         }
-
-        private int GetBlockX(int block, int i) => (block / 3) * 3 + i / 3;
-
-        private int GetBlockY(int block, int i) => (block % 3) * 3 + i % 3;
     }
 }

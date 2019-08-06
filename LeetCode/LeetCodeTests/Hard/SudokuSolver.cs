@@ -37,7 +37,7 @@ namespace LeetCodeTests.Hard
                 new[] {'3', '4', '5', '2', '8', '6', '1', '7', '9'}
             };
 
-            ListExtensions<char>.ShouldEqual(Solver.Solve(board), result);
+            ListExtensions<char>.ShouldEqual(Solver.SolveSudoku(board), result);
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace LeetCodeTests.Hard
                 new[] {'6', '4', '1', '2', '7', '5', '9', '8', '3'}
             };
 
-            ListExtensions<char>.ShouldEqual(Solver.Solve(board), result);
+            ListExtensions<char>.ShouldEqual(Solver.SolveSudoku(board), result);
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace LeetCodeTests.Hard
                 new[] {'3', '4', '5', '2', '8', '6', '1', '7', '9'}
             };
 
-            ListExtensions<char>.ShouldEqual(Solver.Solve(board), result);
+            ListExtensions<char>.ShouldEqual(Solver.SolveSudoku(board), result);
         }
     }
 }
