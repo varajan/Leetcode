@@ -8,49 +8,45 @@ namespace LeetCode.Hard
     {
         public char[][] SolveSudoku(char[][] board) => Solve(board);
 
-        private char[][] Solve(char[][] test)
+        private char[][] Solve(char[][] board)
+        {
+            Dictionary<Point, List<char>> options;
+            List<KeyValuePair<Point, List<char>>> singleOptions;
+            var test = board.Select(x => x.ToArray()).ToArray();
+
+            do
             {
-                Dictionary<Point, List<char>> options;
-                List<KeyValuePair<Point, List<char>>> singleOptions;
+                options = GetOptions(test);
+                singleOptions = options.Where(x => x.Value.Count == 1).ToList();
 
-                do
+                if (!singleOptions.Any())
                 {
-                    options = GetOptions(test);
+                    options = OptimizedOptions(options);
                     singleOptions = options.Where(x => x.Value.Count == 1).ToList();
-
-                    if (!singleOptions.Any())
-                    {
-                        options = OptimizedOptions(options);
-                        singleOptions = options.Where(x => x.Value.Count == 1).ToList();
-                    }
-
-                    if (singleOptions.Any())
-                    {
-                        singleOptions.ForEach(option => test[option.Key.X][option.Key.Y] = option.Value.First());
-
-                    if (!test.Any(row => row.Any(x => x == '.'))) return test;
-                    }
-                } while (singleOptions.Any());
-
-                var sortedOption = options.OrderBy(x => x.Value.Count).FirstOrDefault();
-                if (sortedOption.Value != null)
-                {
-                    foreach (var x in sortedOption.Value)
-                    {
-                        if (test == null) return null;
-
-                        var matrix = test.Select(row => row.ToArray()).ToArray();
-                        matrix[sortedOption.Key.X][sortedOption.Key.Y] = x;
-
-                        if (!IsValidSudoku(matrix)) continue;
-
-                        var solution = Solve(matrix);
-                        if (solution != null) return solution;
-                    }
                 }
 
-            return null;
+                if (singleOptions.Any())
+                {
+                    singleOptions.ForEach(option => test[option.Key.X][option.Key.Y] = option.Value.First());
+
+                if (!test.Any(row => row.Any(x => x == '.'))) return test;
+                }
+            } while (singleOptions.Any());
+
+            var sortedOption = options.OrderBy(x => x.Value.Count).FirstOrDefault();
+            if (sortedOption.Value != null)
+            {
+                foreach (var x in sortedOption.Value)
+                {
+                    test[sortedOption.Key.X][sortedOption.Key.Y] = x;
+
+                    var solution = Solve(test);
+                    if (solution != null) return solution;
+                }
             }
+
+            return null;
+        }
 
         private Dictionary<Point, List<char>> GetOptions(char[][] test)
         {
@@ -157,7 +153,7 @@ namespace LeetCode.Hard
             }
         }
 
-        private bool IsValidNumber(in char[][] test, Point point, char x)
+        private bool IsValidNumber(char[][] test, Point point, char x)
         {
         var matrix = test.Select(a => a.ToArray()).ToArray();
         matrix[point.X][point.Y] = x;
@@ -165,7 +161,7 @@ namespace LeetCode.Hard
         return IsValidSudoku(matrix);
         }
 
-        private bool IsValidSudoku(in char[][] test)
+        private bool IsValidSudoku(char[][] test)
         {
         for (int i = 0; i < 9; i++)
         {
@@ -176,7 +172,7 @@ namespace LeetCode.Hard
 
         return true;
 
-            bool IsRowValid(in char[][] matrix, int row)
+            bool IsRowValid(char[][] matrix, int row)
             {
                 var chars = new HashSet<int>();
 
@@ -191,7 +187,7 @@ namespace LeetCode.Hard
                 return true;
             }
 
-            bool IsColumnValid(in char[][] matrix, int column)
+            bool IsColumnValid(char[][] matrix, int column)
             {
                 var chars = new HashSet<int>();
 
@@ -206,7 +202,7 @@ namespace LeetCode.Hard
                 return true;
             }
 
-            bool IsBlockValid(in char[][] matrix, int block)
+            bool IsBlockValid(char[][] matrix, int block)
             {
                 var chars = new HashSet<int>();
 
