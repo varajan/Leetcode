@@ -1,16 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace LeetCode.Medium
+﻿namespace LeetCode.Medium
 {
     public class JumpGame
     {
         public bool CanJump(int[] nums)
         {
             var visited = new bool[nums.Length];
-            //for (int i = 0; i < nums.Length; i++)
-            //{
-            //    visited.Add(false);
-            //}
 
             return TryJump(0);
 
@@ -31,7 +25,8 @@ namespace LeetCode.Medium
                 return false;
             }
 
-            bool IsVisited(int i) => i < visited.Length && visited[i];
+
+            bool IsVisited(int i) => i > visited.Length || visited[i];
             void SetVisited(int i)
             {
                 if (i < visited.Length) visited[i] = true;
