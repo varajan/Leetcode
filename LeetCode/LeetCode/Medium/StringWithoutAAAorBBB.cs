@@ -1,4 +1,4 @@
-﻿namespace LeetCodeTests.Medium
+﻿namespace LeetCode.Medium
 {
     class StringWithoutAAAorBBB
     {
