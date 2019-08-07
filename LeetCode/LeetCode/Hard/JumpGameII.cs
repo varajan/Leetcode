@@ -23,9 +23,12 @@ namespace LeetCode.Hard
 
                 SetVisited(i, step++);
 
-                for (int x = nums[i]; x > 0; x--)
+                var count = nums[i];
+                var limit = count / 5 * 4;
+
+                for (int x = count; x > 0; x--)
                 {
-                    if (nums[i] > 1000 && x < nums[i]/2) break;
+                    if (count > 1000 && x < limit) break;
                     if (ValidToVisit(i + x, step)) Jump(i + x, step);
                 }
             }
