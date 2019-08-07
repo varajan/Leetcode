@@ -7,7 +7,7 @@ namespace LeetCode.Medium
     {
         public int CarFleet(int target, int[] position, int[] speed)
         {
-            int result = 0;
+            var result = 0;
 
             var cars = speed
                 .Select((x, i) => (position: position[i], speed: speed[i]))
