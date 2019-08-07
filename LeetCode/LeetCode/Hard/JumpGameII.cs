@@ -25,7 +25,7 @@ namespace LeetCode.Hard
 
                 for (int x = nums[i]; x > 0; x--)
                 {
-                    //Jump(i + x, step);
+                    if (nums[i] > 1000 && x < nums[i]/2) break;
                     if (ValidToVisit(i + x, step)) Jump(i + x, step);
                 }
             }
