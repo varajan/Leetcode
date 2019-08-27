@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 public class LetterCombinationsOfAPhoneNumber {
     public IList<string> LetterCombinations(string digits) {
         var result = new List<string> {""};

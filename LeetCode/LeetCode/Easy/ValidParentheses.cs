@@ -1,12 +1,13 @@
+using System.Collections.Generic;
+using System.Linq;
+
 public class ValidParentheses {
     public bool IsValid(string s) {
         var bracketsQueue = "";
-        var openBrackets = "({[";
-        var closeBrackets = ")}]";
         var brackets = new Dictionary<char, int>{ {'(', 0}, {'{', 0}, {'[', 0} };
         
         foreach (var x in s){
-            if (openBrackets.Contains(x))
+            if ("({[".Contains(x))
             {
                 brackets[x]++;
                 bracketsQueue += x;

@@ -1,5 +1,5 @@
 public class IslandPerimeter {
-    public int IslandPerimeter(int[][] grid) {
+    public int GetIslandPerimeter(int[][] grid) {
         int result = 0;
         
         for (int x = 0; x < grid.Length; x++)

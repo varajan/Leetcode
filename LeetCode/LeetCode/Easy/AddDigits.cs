@@ -1,5 +1,5 @@
 public class AddDigits {
-    public int AddDigits(int num) {
+    public int Add_Digits(int num) {
         while (num > 9) num = getSum(num);
         return num;
         

@@ -1,4 +1,4 @@
-public class Solution {
+public class TwoSumII {
     public int[] TwoSum(int[] nums, int target) {
         int i = 0;
         int j = nums.Length - 1;
@@ -11,7 +11,5 @@ public class Solution {
             
             return new [] {i+1, j+1};
         }
-
-        return null;
     }
 }

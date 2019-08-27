@@ -1,3 +1,5 @@
+using System;
+
 public class ValidPalindrome {
     public bool IsPalindrome(string s) {
         if (s.Length == 0) return true;

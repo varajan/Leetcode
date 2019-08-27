@@ -1,4 +1,4 @@
-public class Solution {
+public class PalindromeNumber {
     public bool IsPalindrome(int x) {
         var text = x.ToString();
         

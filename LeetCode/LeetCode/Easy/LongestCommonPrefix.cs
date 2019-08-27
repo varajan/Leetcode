@@ -1,3 +1,5 @@
+using System.Linq;
+
 public class Solution {
     public string LongestCommonPrefix(string[] strs) {
         var result = "";
