@@ -1,12 +1,6 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     public int val;
- *     public ListNode next;
- *     public ListNode(int x) { val = x; }
- * }
- */
-public class Solution {
+using System;
+
+public class MergeTwoSortedLists {
     public ListNode MergeTwoLists(ListNode l1, ListNode l2) {
         ListNode result = null;
         
@@ -15,12 +9,11 @@ public class Solution {
             if (l2 == null) {Append(l1); break;}
 
             Append(new ListNode( Math.Min(l1.val, l2.val) ));
-            
             if (l1.val < l2.val) l1 = l1.next; else l2 = l2.next;
         }
-        
+
         return result;
-        
+
         void Append(ListNode node){
             if (result == null) {
                 result = node;
@@ -30,5 +23,12 @@ public class Solution {
                 current.next = node;
             }
         }
-    }    
+    }
+
+    public class ListNode
+    {
+        public int val;
+        public ListNode next;
+        public ListNode(int x) { val = x; }
+    }
 }
